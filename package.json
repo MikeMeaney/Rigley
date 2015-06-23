@@ -1,0 +1,30 @@
+{
+  "name": "rigWeb",
+  "version": "0.0.1",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start" : "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MikeMeaney/Rigley.git"
+  },
+  "keywords": [
+    "Arduino",
+    "UCSD"
+  ],
+  "author": "Mike Meaney",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MikeMeaney/rigWeb/issues"
+  },
+  "homepage": "https://github.com/MikeMeaney/rigWeb",
+  "dependencies": {
+    "body-parser": "^1.12.4",
+    "buffer": "^3.2.2",
+    "express": "^4.12.4",
+    "iconv-lite": "^0.4.10",
+    "mongoose": "^4.0.5"
+  }
+}

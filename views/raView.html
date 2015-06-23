@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="raPortal">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="Research Assitant Portal" content="">
+    <meta name="Mike Meaney + Jason VM Herbert (San Diego, CA 2015)" content="">
+
+    <title>Rig View</title>
+   
+    <!--Angular, bitches-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    
+    
+    <!-- Bootstrap core CSS -->
+    <!--<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>-->
+   <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- Bootstrap UI (I have no idea what I'm doing)-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>
+    <!-- Custom styles for this template -->
+    <!--<link href="starter-template.css" rel="stylesheet">-->
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../bower_components/bootstrap/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!--<script src="../bower_components/bootstrap/assets/js/ie-emulation-modes-warning.js"></script>-->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <!--- Always have a container Div, without Bootstrap fails to exisit-->
+      <div class="container">
+        <!-- This is our Nav-Bar at the top-->
+        <div class="navbar-header"> 
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Rigley</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="Rig View"><a href="/rigPortal">Rig View</a></li>
+            <li><a href="#">RA Portal</a></li>
+            <!-- <li><a href="#contact">Contact</a></li> -->
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <!-- This is the body of the page -->
+    <div ng-controller="dataController" class="container">
+      <!-- Kludgey fix to prevent content from going behind navbar-->
+      <div class="row" style="height:75px">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+      </div>
+
+      <div class="col-md-12">
+        <table class ="table table-bordered">
+        <thead>
+            <tr>
+                <th>RigName</th>
+                <th>PID</th>
+                <th>timeIN</th>
+                <th>timeOUT</th>
+                <th>Calculated Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="x in data">
+              <td>{{ x.RigID }}</td>
+              <td>{{ x.PID }}</td>
+              <td>{{ x.Data.timeIn }}</td>
+              <td>{{ x.Data.timeOut }}</td>
+              <td>{{ x.Data.durration }}</td>                 
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript">
+      var app = angular.module('raPortal', ['ui.bootstrap']); // Yee App of cause and purpose
+      var server = "http://rigley-meaneymiked.rhcloud.com/"
+      
+      app.controller('dataController', function($scope, $http){
+        $http.get(server+'/data').
+          success(function(response){
+            $scope.data = response;
+          });
+
+      });
+
+    </script>
+    
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+ 
+  </body>
+</html>
+
