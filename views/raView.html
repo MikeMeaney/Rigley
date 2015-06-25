@@ -78,15 +78,17 @@
                 <th>PID</th>
                 <th>Insertion Time</th>
                 <th>Removal Time</th>
-                <th>Duration</th>
+                <th>
+                  <a href="#" ng-click="sortType = 'name'">Duration</a>
+                </th>
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="x in data | orderBy:sortType:sortReverse">
               <td>{{ x.RigID }}</td>
               <td>{{ x.PID }}</td>
-              <td>{{ x.Data.timeIn | date:'MM-dd-yyyy HH:mm:ss Z' }}</td>
-              <td>{{ x.Data.timeOut | date:'MM-dd-yyyy HH:mm:ss Z' }}</td>
+              <td>{{ x.Data.timeIn | date:'MM-dd-yyyy HH:mm:ss' }}</td>
+              <td>{{ x.Data.timeOut | date:'MM-dd-yyyy HH:mm:ss' }}</td>
               <td>{{ x.Data.durration }}</td>                 
             </tr>
           </tbody>
