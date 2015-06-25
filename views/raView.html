@@ -120,6 +120,12 @@
         $http.get(server+'/data').
           success(function(response){
             $scope.data = response;
+
+            //convert the strings to numbers
+            for(each d in $scope.data){
+              console.log(d);
+            }
+
           });
         }, 1000);
 
