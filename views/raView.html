@@ -85,7 +85,7 @@
             <tr ng-repeat="x in data | orderBy:sortType:sortReverse">
               <td>{{ x.RigID }}</td>
               <td>{{ x.PID }}</td>
-              <td>{{ x.Data.timeIn }}</td>
+              <td>{{ x.Data.timeIn | date:'MM-dd-yyyy HH:mm:ss Z' }}</td>
               <td>{{ x.Data.timeOut }}</td>
               <td>{{ x.Data.durration }}</td>                 
             </tr>
@@ -130,6 +130,8 @@
             }
 
           });
+
+
         }, 1000);
 
          //Varibles for sorting the table
