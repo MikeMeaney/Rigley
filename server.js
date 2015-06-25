@@ -62,7 +62,7 @@ app.get('/', function (req, res) {
   console.log("Request @ /");
   res.sendFile(__dirname + '/views/raView.html');
   console.log("Herrroo Hanz Britz....");
-  console.log("...Can you just step over there?")
+  console.log("...Can you just step over there?");
 });
 
 //The Route for saving data to the Server's Mongo DB 
