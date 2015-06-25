@@ -82,7 +82,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="x in data | orderBy:sortType:sortReverse">
+            <tr ng-repeat="x in data | orderBy:x.Data.durration">
               <td>{{ x.RigID }}</td>
               <td>{{ x.PID }}</td>
               <td>{{ x.Data.timeIn }}</td>
