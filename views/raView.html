@@ -74,12 +74,30 @@
         <table class ="table table-bordered">
         <thead>
             <tr>
-                <th>RigName</th>
-                <th>PID</th>
-                <th>Insertion Time</th>
-                <th>Removal Time</th>
                 <th>
-                  <a href="#" ng-click="sortType = 'Data.durration'; sortReverse = !sortReverse">Duration</a>
+                  <a href='#' ng-click="sortType = 'RigID';sortReverse = !sortReverse" >
+                    RigName
+                  </a>
+                </th>
+                <th>
+                  <a href='#' ng-click="sortType = 'PID';sortReverse = !sortReverse" >
+                    PID
+                  </a>
+                </th>
+                <th>
+                  <a href='#' ng-click="sortType = 'Data.timeIn';sortReverse = !sortReverse" >
+                    Insertion Time
+                  </a>
+                </th>
+                <th>
+                  <a href='#' ng-click="sortType = 'Data.timeOut;'sortReverse = !sortReverse" >
+                    Removal Time
+                  </a>
+                </th>
+                <th>
+                  <a href="#" ng-click="sortType = 'Data.durration'; sortReverse = !sortReverse">
+                    Duration
+                  </a>
                 </th>
             </tr>
           </thead>
