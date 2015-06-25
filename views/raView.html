@@ -82,7 +82,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="x in data | orderBy:PID">
+            <tr ng-repeat="x in data | orderBy:sortType:sortReverse">
               <td>{{ x.RigID }}</td>
               <td>{{ x.PID }}</td>
               <td>{{ x.Data.timeIn }}</td>
@@ -124,13 +124,10 @@
         }, 1000);
 
          //Varibles for sorting the table
-        $scope.sortType = 'Data.durration'; //Set Default Sort Type
+        $scope.sortType = 'PID'; //Set Default Sort Type
         $scope.sortReverse = false;  //Set Default Sort Order
         $scope.searchData = '';      //Set Default Search/Filter Term
 
-        $scope.predicate = function(d){
-          return d.Data.durration;
-        }
       });
 
     </script>
