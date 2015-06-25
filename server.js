@@ -61,7 +61,7 @@ db.once('open', function(callback){
 app.get('/', function (req, res) {
   console.log("Request @ /");
   res.sendFile(__dirname + '/views/raView.html');
-  console.log("Herrroo");
+  console.log("Herrroo Hanz Britz....");
 });
 
 //The Route for saving data to the Server's Mongo DB 
