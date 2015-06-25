@@ -121,10 +121,12 @@
           success(function(response){
             $scope.data = response;
 
-            //convert the strings to numbers
+            //convert the strings to numbers (Really, this should be done on the server, but we are here now so meh :/)
             for(var d=0; d < $scope.data.length; d++){
               //console.log("Howdy " + $scope.data[d].Data.durration); //Debug
               $scope.data[d].Data.durration = parseFloat($scope.data[d].Data.durration);
+              $scope.data[d].Data.timeIn = parseFloat($scope.data[d].Data.timeIn);
+              $scope.data[d].Data.timeIn = parseFloat($scope.data[d].Data.timeOut);
             }
 
           });
