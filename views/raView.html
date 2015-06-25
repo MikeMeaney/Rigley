@@ -113,10 +113,7 @@
       
       
       app.controller('dataController', function($scope, $http){
-        //Varibles for sorting the table
-        $scope.sortType = 'durration'; //Set Default Sort Type
-        $scope.sortReverse = false;  //Set Default Sort Order
-        $scope.searchData = '';      //Set Default Search/Filter Term
+       
 
         //Get the Data every second, Kludgey, I know, but deadlines are deadlines :/ Will learn about teh socket ioS in next Rev.
         setInterval(function(){
@@ -125,6 +122,11 @@
             $scope.data = response;
           });
         }, 1000);
+
+         //Varibles for sorting the table
+        $scope.sortType = 'Data.durration'; //Set Default Sort Type
+        $scope.sortReverse = false;  //Set Default Sort Order
+        $scope.searchData = '';      //Set Default Search/Filter Term
       });
 
     </script>
