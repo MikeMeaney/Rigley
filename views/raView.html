@@ -108,14 +108,17 @@
     <script type="text/javascript">
       var app = angular.module('raPortal', ['ui.bootstrap']); // Yee App of cause and purpose
       var server = "http://rigley-meaneymiked.rhcloud.com/"
-      //Varibles for sorting the table
-      $scope.sortType = 'timeOut'; //Set Default Sort Type
-      $scope.sortReverse = false;  //Set Default Sort Order
-      $scope.searchData = '';      //Set Default Search/Filter Term
+      
 
       
-      //Get the Data every second, Kludgey, I know, but deadlines are deadlines :/ Will learn about teh socket ioS in next Rev.
+      
       app.controller('dataController', function($scope, $http){
+        //Varibles for sorting the table
+        $scope.sortType = 'timeOut'; //Set Default Sort Type
+        $scope.sortReverse = false;  //Set Default Sort Order
+        $scope.searchData = '';      //Set Default Search/Filter Term
+
+        //Get the Data every second, Kludgey, I know, but deadlines are deadlines :/ Will learn about teh socket ioS in next Rev.
         setInterval(function(){
         $http.get(server+'/data').
           success(function(response){
