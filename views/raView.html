@@ -87,7 +87,7 @@
               <td>{{ x.PID }}</td>
               <td>{{ x.Data.timeIn }}</td>
               <td>{{ x.Data.timeOut }}</td>
-              <td>{{ x.Data.durration }}</td>                 
+              <td ng-repeat ="(name,d) in data.Data">{{ d.durration }}</td>                 
             </tr>
           </tbody>
         </table>
