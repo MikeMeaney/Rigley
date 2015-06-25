@@ -76,9 +76,9 @@
             <tr>
                 <th>RigName</th>
                 <th>PID</th>
-                <th>timeIN</th>
-                <th>timeOUT</th>
-                <th>Calculated Time</th>
+                <th>Insertion Time</th>
+                <th>Removal Time</th>
+                <th>Duration</th>
             </tr>
           </thead>
           <tbody>
@@ -91,7 +91,13 @@
             </tr>
           </tbody>
         </table>
-      </div>
+
+          <div class="alert alert-info">
+            <p>Sort Type: {{ sortType }}</p>
+            <p>Sort Reverse: {{ sortReverse }}</p>
+            <p>Search Query: {{ searchData }}</p>
+          </div>
+        </div>
 
     </div><!-- /.container -->
 
@@ -102,13 +108,20 @@
     <script type="text/javascript">
       var app = angular.module('raPortal', ['ui.bootstrap']); // Yee App of cause and purpose
       var server = "http://rigley-meaneymiked.rhcloud.com/"
+      //Varibles for sorting the table
+      $scope.sortType = 'timeOut'; //Set Default Sort Type
+      $scope.sortReverse = false;  //Set Default Sort Order
+      $scope.searchData = '';      //Set Default Search/Filter Term
+
       
+      //Get the Data every second, Kludgey, I know, but deadlines are deadlines :/ Will learn about teh socket ioS in next Rev.
       app.controller('dataController', function($scope, $http){
+        setInterval(function(){
         $http.get(server+'/data').
           success(function(response){
             $scope.data = response;
           });
-
+        }, 1000);
       });
 
     </script>
