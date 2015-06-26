@@ -65,10 +65,14 @@ app.get('/', function (req, res) {
   console.log("...Can you just step over there?");
 });
 
+app.get('/dataExport', function(req,res){
+  res.send("Flarp Fart");
+});
+
 //The Route for saving data to the Server's Mongo DB 
 app.get('/data', function(req,res){
   res.header('Access-Control-Allow-Origin', '*');
-  console.log("------ GET req @ " + req.path +" ------" )
+  console.log("!------ GET req @ " + req.path +" ------!" )
   console.log(req.query);
   //Check to see if there is data in the query
   if(req.query.rig != undefined){
