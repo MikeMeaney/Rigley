@@ -96,7 +96,7 @@ app.get('/dataExport', function(req,res){
     }
   });
   console.log(flatObjects);
-
+  res.send(flatObjects);
 });
 
 //The Route for saving data to the Server's Mongo DB 
