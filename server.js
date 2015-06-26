@@ -93,7 +93,15 @@ app.get('/dataExport', function(req,res){
       flatObjects[d] = flatObject;
       console.log(flatObjects[d]);
     } // EOF for(d in docs)
-    res.json(flatObjects);
+    //res.json(flatObjects); // Debug // Send the flattend objects
+    //As God as my wittness, this will work.
+    //Convert flatObjects into CSV string
+    var theFields = ['PID', 'RigID','timeIn','timeOut','durration'];
+    json2csv({data: flatObjects, fields: theFields}, function(err, csv){
+      if(err) throw err;
+      res.send(csv);
+    })
+
   });
 
   //res.send("Fart"); // Debug
