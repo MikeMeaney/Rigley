@@ -65,9 +65,9 @@ app.get('/', function (req, res) {
   console.log("...Can you just step over there?");
 });
 
-app.get('/dataExport', function(req,res){
-  res.header('Access-Control-Allow-Origin', '*');
-  console.log("------ GET req @ " + req.path +" ------" )
+// app.get('/dataExport', function(req,res){
+//   res.header('Access-Control-Allow-Origin', '*');
+//   console.log("------ GET req @ " + req.path +" ------" )
   
 //   //convert all the objects in the DB to flat 1-D objects
 //   RigData.find({}, function(err,docs){
