@@ -71,7 +71,7 @@ app.get('/dataExport', function(req,res){
   
   //convert all the objects in the DB to flat 1-D objects
   var flatObjects = [] //Place to hold the objects
-  rigData.find({}, function(err,docs){
+  RigData.find({}, function(err,docs){
     if (err) throw err;
     res.json(docs);
   })
