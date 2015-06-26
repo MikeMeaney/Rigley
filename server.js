@@ -75,6 +75,7 @@ app.get('/dataExport', function(req,res){
     if (err) throw err;
     
     var flatObjects = []; //Place to hold the objects
+    var theCSV = '';
     console.log("There are "+docs.length+" rig data docs.");
     for(var d=0; d<docs.length; d++){
       //console.log(docs[d]); //debug
@@ -87,18 +88,19 @@ app.get('/dataExport', function(req,res){
       }
 
       flatObjects[d] = flatObject;
-      //Do the magic and change ye format!
+
+    }
+     //Do the magic and change ye format!
       var fields = ["PID","RigID","timeIn","timeOut","duration"];
       json2csv({data: flatObjects, fields: fields}, function(err, csv){
         if(err) console.log(err);
         console.log(csv);
-        res.send(csv);
+        theCSV = csv;
       });
-    }
   });
   console.log(flatObjects);
-  //res.send(flatObjects);
-});
+  res.send(theCSV);
+}); // end of dataExport
 
 //The Route for saving data to the Server's Mongo DB 
 app.get('/data', function(req,res){
