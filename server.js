@@ -90,7 +90,7 @@ app.get('/dataExport', function(req,res){
       var fields = ["PID","RigID","timeIn","timeOut","duration"];
       json2csv({data: flatObjects, fields: fields}, function(err, csv){
         if(err) console.log(err);
-        res.send(csv);
+        console.log(csv);
       });
 
       //console.log(flatObject); //Debug
