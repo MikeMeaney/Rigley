@@ -74,9 +74,13 @@ app.get('/dataExport', function(req,res){
   RigData.find({}, function(err,docs){
     if(err) throw err;
     console.log(docs.length + " Documents");
+    //A place to store the flatended docs
+    var flatObjects = [];
+    //Iterate through all the Docs
     for(var d = 0; d < docs.length; d++){
-      console.log("----- "+ d +" -----"); //Debug
+      console.log("----- "+ d +" -----"); //Debug //Print which Doc is being worked with
 
+       //Re-map the nested vars into a 1-D object
        var flatObject = {
         "PID" : docs[d].PID,
         "RigID" : docs[d].RigID,
@@ -84,8 +88,12 @@ app.get('/dataExport', function(req,res){
         "timeOut" : parseInt(docs[d].Data.timeOut),
         "duration": parseInt(docs[d].Data.durration)
       }
-      console.log(flatObject);
-    } // EOF for d in docs
+      console.log(flatObject); // Debug // Print out the flattend object
+      console.log("******* "+ d +" *******"); //Debug //Print which Doc is being worked with
+      flatObjects[d] = flatObject;
+      console.log(flatObjects[d]);
+    } // EOF for(d in docs)
+
   });
 
   res.send("Fart"); // Debug
