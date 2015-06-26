@@ -92,7 +92,7 @@ app.get('/dataExport', function(req,res){
   });
   console.log(flatObjects);
   res.send(theCSV);
-// }); // end of dataExport
+}); // end of dataExport
 
 //The Route for saving data to the Server's Mongo DB 
 app.get('/data', function(req,res){
