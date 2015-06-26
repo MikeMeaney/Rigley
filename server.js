@@ -89,7 +89,7 @@ app.get('/dataExport', function(req,res){
       //Do the magic and change ye format!
       var fields = ["PID","RigID","timeIn","timeOut","duration"];
       json2csv({data: flatObjects, fields: fields}, function(err, csv){
-        if(err) res.send(err);
+        if(err) console.log(err);
         res.send(csv);
       });
 
