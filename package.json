@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start" : "node server.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
     "buffer": "^3.2.2",
     "express": "^4.12.4",
     "iconv-lite": "^0.4.10",
+    "json2csv": "^2.4.3",
     "mongoose": "^4.0.5"
   }
 }
