@@ -100,13 +100,16 @@ app.get('/dataExport', function(req,res){
     var theFields = ['PID', 'RigID','timeIn','timeOut','durration'];
     json2csv({data: flatObjects, fields: theFields}, function(err, csv){
       if(err) throw err;
-      res.send(csv); //Debug // Send the Raw CSV
+      //res.send(csv); //Debug // Send the Raw CSV
       //Now for some uncharted waters, creating and sending the CSV file.
       console.log("Saving CSV to File system @ /tmp");
+      //Create the CSV File.
       fs.writeFile('/tmp/rigdata.csv', csv, function(err){
         return console.log(err);
       });
       console.log("FILE SAVED!");
+      //Send that puppy on through
+      res.download('/tmp/rigData.csv');
     });
 
   });
