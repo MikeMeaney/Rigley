@@ -68,7 +68,8 @@ app.get('/', function (req, res) {
 function getAllDocs(Schema){
   Schema.find({}, function(err, docs){
     if(err) throw err;
-    console.log("There are "+ docs.length + "Documents");
+    console.log("There are "+ docs.length + " Documents");
+    console.log(docs);
     return docs
   });
 }
