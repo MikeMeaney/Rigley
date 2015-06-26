@@ -103,22 +103,24 @@ app.get('/dataExport', function(req,res){
       //res.send(csv); //Debug // Send the Raw CSV
       //Now for some uncharted waters, creating and sending the CSV file.
       console.log("Saving CSV to File system @ /tmp");
+      
       //Create the CSV File.
-      fs.writeFile(process.env.OPENSHIFT_TMP_DIR+ 'rigdatas.csv', csv, function(err){
+      fs.writeFile(process.env.OPENSHIFT_TMP_DIR+ 'rigdatas.csv', csv, function(err,written){
         return console.log(err);
-      });
-      console.log("FILE SAVED!");
-      //Send that puppy on through
-      res.download(process.env.OPENSHIFT_TMP_DIR + 'rigdatas.csv');
-      //Then delete it to prevent many copies
+        console.log("FILE SAVED! " + written);
+        //Send that puppy on through
+        res.download(process.env.OPENSHIFT_TMP_DIR + 'rigdatas.csv');
+        //Then delete it to prevent many copies
 
-    });
+      }); // EOF for writeFile
+      
+    }); //EOF for json2csv
 
-  });
+  }); //EOF for RigData.find
 
   //res.send("Fart"); // Debug
 
-}); // end of dataExport
+}); // EOF for dataExport
 
 //The Route for saving data to the Server's Mongo DB 
 app.get('/data', function(req,res){
