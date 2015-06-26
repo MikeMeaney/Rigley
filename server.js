@@ -69,29 +69,7 @@ app.get('/', function (req, res) {
 app.get('/dataExport', function(req,res){
   res.header('Access-Control-Allow-Origin', '*');
   console.log("------ GET req @ " + req.path +" ------" )
-  
-  //convert all the objects in the DB to flat 1-D objects
-  RigData.find({}, function(err,docs){
-    if (err) throw err;
-    
-    var flatObjects = []; //Place to hold the objects
-    var theCSV = '';
-    console.log("There are "+docs.length+" rig data docs.");
-    
 
-      flatObjects[d] = flatObject;
-
-    }
-     //Do the magic and change ye format!
-      var fields = ["PID","RigID","timeIn","timeOut","duration"];
-      json2csv({data: flatObjects, fields: fields}, function(err, csv){
-        if(err) console.log(err);
-        console.log(csv);
-        theCSV = csv;
-      });
-  });
-  console.log(flatObjects);
-  res.send(theCSV);
 }); // end of dataExport
 
 //The Route for saving data to the Server's Mongo DB 
