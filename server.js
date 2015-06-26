@@ -76,7 +76,14 @@ app.get('/dataExport', function(req,res){
     var flatObjects = []; //Place to hold the objects
     console.log("There are "+docs.length+" rig data docs.");
     for(var d=0; d<docs.length; d++){
-      console.log(docs[d]);
+      //console.log(docs[d]); //debug
+      var flatObject = {
+        "PID" : docs[d].PID,
+        "RigID" : docs[d].RigID,
+        "timeIn" : docs[d].Data.timeIn,
+        "timeOut" : docs[d].Data.timeOut,
+        "duration": docs[d].Data.durration
+      }
     }
     res.send(docs);
   })
