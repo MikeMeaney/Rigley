@@ -80,9 +80,9 @@ app.get('/dataExport', function(req,res){
       var flatObject = {
         "PID" : docs[d].PID,
         "RigID" : docs[d].RigID,
-        "timeIn" : docs[d].Data.timeIn,
-        "timeOut" : docs[d].Data.timeOut,
-        "duration": docs[d].Data.durration
+        "timeIn" : parseInt(docs[d].Data.timeIn),
+        "timeOut" : parseInt(docs[d].Data.timeOut),
+        "duration": parseInt(docs[d].Data.durration)
       }
 
       flatObjects[d] = flatObject;
