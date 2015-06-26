@@ -65,6 +65,12 @@ app.get('/', function (req, res) {
   console.log("...Can you just step over there?");
 });
 
+function getAllDocs(){
+
+
+  return docs
+}
+
 //Route for exporting
 app.get('/dataExport', function(req,res){
   res.header('Access-Control-Allow-Origin', '*');
@@ -72,8 +78,8 @@ app.get('/dataExport', function(req,res){
 
   RigData.find({}, function(err,docs){
     console.log("There are "+ docs.length + "Rig Data Documents");
-    res.send(docs.length);
   });
+  res.send("Fart");
 
 }); // end of dataExport
 
