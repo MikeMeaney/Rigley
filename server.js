@@ -72,6 +72,7 @@ app.get('/dataExport', function(req,res){
 
   RigData.find({}, function(err,docs){
     console.log("There are "+ docs.length + "Rig Data Documents");
+    res.send(docs.length);
   });
 
 }); // end of dataExport
