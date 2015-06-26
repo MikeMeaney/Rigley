@@ -68,7 +68,11 @@ app.get('/', function (req, res) {
 //Route for exporting
 app.get('/dataExport', function(req,res){
   res.header('Access-Control-Allow-Origin', '*');
-  console.log("------ GET req @ " + req.path +" ------" )
+  console.log("------ GET req @ " + req.path +" ------" );
+
+  RigData.find({}, function(err,docs){
+    console.log("There are "+ docs.length + "Rig Data Documents");
+  });
 
 }); // end of dataExport
 
