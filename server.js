@@ -65,9 +65,10 @@ app.get('/', function (req, res) {
   console.log("...Can you just step over there?");
 });
 
-function getAllDocs(schema){
-  schema.find({}, function(err, docs){
+function getAllDocs(){
+  RigData.find({}, function(err, docs){
     if(err) throw err;
+    console.log("There are "+ docs.length + "Documents");
     return docs
   });
 }
@@ -78,10 +79,10 @@ app.get('/dataExport', function(req,res){
   console.log("------ GET req @ " + req.path +" ------" );
 
   // RigData.find({}, function(err,docs){
-  //   console.log("There are "+ docs.length + "Rig Data Documents");
+  //   
   // });
-
-  console.log(getAllDocs(RigData));
+  var theDocs = getAllDocs();
+  console.log(theDocs);
   res.send("Fart");
 
 }); // end of dataExport
