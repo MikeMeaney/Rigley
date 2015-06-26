@@ -74,8 +74,8 @@ app.get('/dataExport', function(req,res){
     if (err) throw err;
     
     var flatObjects = []; //Place to hold the objects
-
-    res.send(docs.length);
+    
+    res.send(docs);
   })
 
 });
