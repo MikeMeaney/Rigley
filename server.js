@@ -74,7 +74,7 @@ app.get('/dataExport', function(req,res){
   RigData.find({}, function(err,docs){
     if(err) throw err;
     console.log(docs.length + " Documents");
-    for(var d = 0; d < docs.length; i++){
+    for(var d = 0; d < docs.length; d++){
       console.log("----- "+ d +" -----");
     }
   });
