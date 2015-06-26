@@ -95,7 +95,6 @@ app.get('/dataExport', function(req,res){
 
       //console.log(flatObject); //Debug
     }
-    res.send(flatObjects);
   })
 
 });
