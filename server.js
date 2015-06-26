@@ -92,11 +92,12 @@ app.get('/dataExport', function(req,res){
       json2csv({data: flatObjects, fields: fields}, function(err, csv){
         if(err) console.log(err);
         console.log(csv);
+        res.send(csv);
       });
     }
   });
   console.log(flatObjects);
-  res.send(flatObjects);
+  //res.send(flatObjects);
 });
 
 //The Route for saving data to the Server's Mongo DB 
