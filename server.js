@@ -92,9 +92,8 @@ app.get('/dataExport', function(req,res){
         if(err) console.log(err);
         console.log(csv);
       });
-
-      //console.log(flatObject); //Debug
     }
+    res.send(flatObject);
   })
 
 });
