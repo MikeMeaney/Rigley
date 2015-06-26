@@ -75,8 +75,17 @@ app.get('/dataExport', function(req,res){
     if(err) throw err;
     console.log(docs.length + " Documents");
     for(var d = 0; d < docs.length; d++){
-      console.log("----- "+ d +" -----");
-    }
+      console.log("----- "+ d +" -----"); //Debug
+
+       var flatObject = {
+        "PID" : docs[d].PID,
+        "RigID" : docs[d].RigID,
+        "timeIn" : parseInt(docs[d].Data.timeIn),
+        "timeOut" : parseInt(docs[d].Data.timeOut),
+        "duration": parseInt(docs[d].Data.durration)
+      }
+      console.log(flatObject);
+    } // EOF for d in docs
   });
 
   res.send("Fart"); // Debug
