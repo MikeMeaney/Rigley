@@ -65,25 +65,17 @@ app.get('/', function (req, res) {
   console.log("...Can you just step over there?");
 });
 
-function getAllDocs(Schema){
-  Schema.find({}, function(err, docs){
-    if(err) throw err;
-    console.log("There are "+ docs.length + " Documents");
-    console.log(docs);
-    return docs
-  });
-}
 
 //Route for exporting
 app.get('/dataExport', function(req,res){
   res.header('Access-Control-Allow-Origin', '*');
   console.log("------ GET req @ " + req.path +" ------" );
 
-  // RigData.find({}, function(err,docs){
-  //   
-  // });
-  var theDocs = getAllDocs(RigData);
-  console.log(theDocs);
+  RigData.find({}, function(err,docs){
+    if(err) throw err;
+    console.log(docs.length + " Documents");
+  });
+
   res.send("Fart");
 
 }); // end of dataExport
