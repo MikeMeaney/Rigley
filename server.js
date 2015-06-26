@@ -20,7 +20,8 @@ var express = require('express'); //Our humble hero...
 var app = express(); // ...has arrived...
 var mongoose = require('mongoose'); // ... along with his noble side-kick!
 var bodyParser = require('body-parser'); // Decodes HTTP data from body (if needed)
-var json2csv = require('json2csv');
+var json2csv = require('json2csv'); // Converts 1-D JSON arrays into CSV format
+var fs = require('fs'); // Needed for righting and saving to the FS
 //Bring in all the Schemas needed for the DB
 var Rig = require('./models/rig');
 var RigData = require('./models/rigData');
@@ -99,8 +100,10 @@ app.get('/dataExport', function(req,res){
     var theFields = ['PID', 'RigID','timeIn','timeOut','durration'];
     json2csv({data: flatObjects, fields: theFields}, function(err, csv){
       if(err) throw err;
-      res.send(csv);
-    })
+      res.send(csv); //Debug // Send the Raw CSV
+      //Now for some uncharted waters, creating and sending the CSV file.
+      console.log("Saving CSV to File system @ " + $OPENSHIFT_TMP_DIR);
+    });
 
   });
 

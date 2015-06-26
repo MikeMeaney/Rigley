@@ -24,6 +24,7 @@
     "body-parser": "^1.12.4",
     "buffer": "^3.2.2",
     "express": "^4.12.4",
+    "fs": "0.0.2",
     "iconv-lite": "^0.4.10",
     "json2csv": "^2.4.3",
     "mongoose": "^4.0.5"
