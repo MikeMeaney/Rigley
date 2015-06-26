@@ -93,10 +93,10 @@ app.get('/dataExport', function(req,res){
       flatObjects[d] = flatObject;
       console.log(flatObjects[d]);
     } // EOF for(d in docs)
-
+    res.json(flatObjects);
   });
 
-  res.send("Fart"); // Debug
+  //res.send("Fart"); // Debug
 
 }); // end of dataExport
 
