@@ -88,7 +88,7 @@ app.get('/dataExport', function(req,res){
       flatObjects[d] = flatObject;
       console.log(flatObject);
     }
-    res.send(docs);
+    res.send(flatObjects);
   })
 
 });
