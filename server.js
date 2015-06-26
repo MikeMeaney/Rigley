@@ -106,7 +106,7 @@ app.get('/dataExport', function(req,res){
       
       //Create the CSV File.
       fs.writeFile(process.env.OPENSHIFT_TMP_DIR+ 'rigdatas.csv', csv, function(err,written){
-        return console.log(err);
+        if(err) throw err;
         console.log("FILE SAVED! " + written);
         //Send that puppy on through
         res.download(process.env.OPENSHIFT_TMP_DIR + 'rigdatas.csv');
