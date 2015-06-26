@@ -84,6 +84,9 @@ app.get('/dataExport', function(req,res){
         "timeOut" : docs[d].Data.timeOut,
         "duration": docs[d].Data.durration
       }
+
+      flatObjects[d] = flatObject;
+      console.log(flatObject);
     }
     res.send(docs);
   })
