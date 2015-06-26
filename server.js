@@ -70,10 +70,12 @@ app.get('/dataExport', function(req,res){
   console.log("------ GET req @ " + req.path +" ------" )
   
   //convert all the objects in the DB to flat 1-D objects
-  var flatObjects = [] //Place to hold the objects
   RigData.find({}, function(err,docs){
     if (err) throw err;
-    res.json(docs);
+    
+    var flatObjects = []; //Place to hold the objects
+
+    res.send(docs.length);
   })
 
 });
