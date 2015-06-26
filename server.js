@@ -94,8 +94,8 @@ app.get('/dataExport', function(req,res){
         console.log(csv);
       });
     }
-    console.log(flatObject);
-  })
+  });
+  console.log(flatObjects);
 
 });
 
