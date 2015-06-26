@@ -20,7 +20,7 @@ var express = require('express'); //Our humble hero...
 var app = express(); // ...has arrived...
 var mongoose = require('mongoose'); // ... along with his noble side-kick!
 var bodyParser = require('body-parser'); // Decodes HTTP data from body (if needed)
-
+var json2csv = require('json2csv');
 //Bring in all the Schemas needed for the DB
 var Rig = require('./models/rig');
 var RigData = require('./models/rigData');
