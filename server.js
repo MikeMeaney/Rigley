@@ -65,8 +65,8 @@ app.get('/', function (req, res) {
   console.log("...Can you just step over there?");
 });
 
-function getAllDocs(){
-  RigData.find({}, function(err, docs){
+function getAllDocs(Schema){
+  Schema.find({}, function(err, docs){
     if(err) throw err;
     console.log("There are "+ docs.length + "Documents");
     return docs
@@ -81,7 +81,7 @@ app.get('/dataExport', function(req,res){
   // RigData.find({}, function(err,docs){
   //   
   // });
-  var theDocs = getAllDocs();
+  var theDocs = getAllDocs(RigData);
   console.log(theDocs);
   res.send("Fart");
 
