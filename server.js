@@ -93,7 +93,7 @@ app.get('/dataExport', function(req,res){
         console.log(csv);
       });
     }
-    res.send(flatObject);
+    console.log(flatObject);
   })
 
 });
