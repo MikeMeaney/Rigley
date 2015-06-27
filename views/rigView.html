@@ -63,6 +63,7 @@
           </button>
           <a class="navbar-brand" href="#">Rigley</a>
         </div>
+        
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li ><a href="/rigPortal">Rig View</a></li>
@@ -71,7 +72,8 @@
                          ng-model="selectedRig" 
                          ng-options="rig.ID for rig in Rigs" 
                          ng-change="rigSelect(rig)"
-                  ></select></a>
+                  />
+                </a>
             </li>
 
             <li class="navInput">
@@ -82,20 +84,19 @@
             </li>
           </ul>
         </div><!--/.nav-collapse -->
-      </div>
     </nav>
     <!-- This is the body of the page -->
-    <div class="containe">
       <!-- Kludgey fix to prevent content from going behind navbar-->
       <div class="row" style="height:75px">
         <div class="col-md-12">&nbsp</div>
       </div> <!-- end kludge-->
 
-      <div class="row">
+      <div class="row"> <!-- Partcipant & RA instructiobs-->
+        <div class="col-md-4 col-md-offset-4">
+          <h1>Howdy There, <br/> I'm Rigley!</div> 
+        </div>
+       </div>
 
-      </div>
-    
-    </div><!-- /.container -->
 
 
     <!-- Bootstrap core JavaScript
