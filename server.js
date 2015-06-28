@@ -86,7 +86,7 @@ app.get('/dataExport', function(req,res){
        var flatObject = {
         "PID" : docs[d].PID,
         "RigID" : docs[d].RigID,
-        "timeIn" : (dateIn.getMonth()+1)+"/"+(dateIn.getDate()+1)+"/"+(dateIn.getMonth()+1),
+        "timeIn" : (dateIn.getMonth()+1)+"/"+(dateIn.getDate()+1)+"/"+(dateIn.getYear()+1),
         "timeOut" : parseInt(docs[d].Data.timeOut),
         "duration": (parseInt(docs[d].Data.durration)/1000)
       }
