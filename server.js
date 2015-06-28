@@ -87,8 +87,9 @@ app.get('/dataExport', function(req,res){
        var flatObject = {
         "PID" : docs[d].PID,
         "RigID" : docs[d].RigID,
-        "timeIn" : (dateIn.getMonth()+1)+"/"+(dateIn.getDate()+1)+"/"+(dateIn.getYear()+1),
-        "timeOut" : (dateOut.getMonth()+1)+"/"+(dateOut.getDate()+1)+"/"+(dateOut.getFullYear()),
+        "date" : (dateOut.getMonth()+1)+"/"+(dateOut.getDate()+1)+"/"+(dateOut.getFullYear()),
+        "timeIn" : (dateIn.getHours()+1)+"/"+(dateIn.getMinutes()+1)+"/"+(dateIn.getSeconds()+1)+"."+(dateIn.getMilliseconds()+1),
+        "timeOut" : (dateOut.getHours()+1)+"/"+(dateOut.getMinutes()+1)+"/"+(dateIn.getSeconds()+1)+"."+(dateOut.getMilliseconds()+1),
         "duration": (parseInt(docs[d].Data.durration)/1000)
       }
       console.log(flatObject); // Debug // Print out the flattend object
@@ -99,7 +100,7 @@ app.get('/dataExport', function(req,res){
     //res.json(flatObjects); // Debug // Send the flattend objects
     //As God as my wittness, this will work.
     //Convert flatObjects into CSV string
-    var theFields = ['PID', 'RigID','timeIn','timeOut','duration'];
+    var theFields = ['PID', 'RigID','date','timeIn','timeOut','duration'];
     json2csv({data: flatObjects, fields: theFields}, function(err, csv){
       if(err) throw err;
       //res.send(csv); //Debug // Send the Raw CSV
