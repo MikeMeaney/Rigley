@@ -91,6 +91,13 @@
                     PID
                   </a>
                 </th>
+
+                 <th>
+                  <a href='#' ng-click="sortType = 'Data.timeOut';sortReverse = !sortReverse" >
+                    Date
+                  </a>
+                </th>
+
                 <th>
                   <a href='#' ng-click="sortType = 'Data.timeIn';sortReverse = !sortReverse" >
                     Insertion Time
@@ -112,9 +119,10 @@
             <tr ng-repeat="x in data | orderBy:sortType:sortReverse">
               <td>{{ x.RigID }}</td>
               <td>{{ x.PID }}</td>
-              <td>{{ x.Data.timeIn | date:'MM-dd-yyyy HH:mm:ss' }}</td>
-              <td>{{ x.Data.timeOut | date:'MM-dd-yyyy HH:mm:ss' }}</td>
-              <td>{{ x.Data.durration }}</td>                 
+              <td>{{ x.Data.timeOut | date:'MM/dd/yyyy' }}</td>
+              <td>{{ x.Data.timeIn | date:'HH:mm:ss' }}</td>
+              <td>{{ x.Data.timeOut | date:'HH:mm:ss' }}</td>
+              <td>{{ x.Data.durration/1000 | number : 3 }}</td>                 
             </tr>
           </tbody>
         </table>
