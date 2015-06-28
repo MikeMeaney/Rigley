@@ -10,6 +10,7 @@
 
     <title>Rig View</title>
    
+
     <!--Angular, bitches-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-sanitize.js"></script>
@@ -20,9 +21,12 @@
    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
+
     <!-- Bootstrap UI (I have no idea what I'm doing)-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>
+
+    
     
     <style type="text/css">  
       .rigReady{
@@ -115,37 +119,61 @@
     <div class = "row instruction">
       <div class = "col-md-12">
         <p ng-bind-html="theInstruction"></p>
+        <p ng-hide="!showClock" ng-controller="TimeCtrl">{{millis / 1000 | number : 3}} seconds.</p>
       </div>
     </div>
     </div> <!--End of Container -->
     <!-- Bootstrap core JavaScript
     ================================================== -->
+    
     <!-- Placed at the end of the document so the pages load faster -->
-    <script type="text/javascript">//Client Side script for Rigley's Test Subject-facing view
-                            //Writen in Angular JS by Mike Meaney in San Diego, CA USA (2015)
+    
+<!-- Moment JS, because milliseconds, that's why. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
 
+    <script type="text/javascript">//Client Side script for Rigley's Test Subject-facing view
+    //Writen in Angular JS by Mike Meaney in San Diego, CA USA (2015)
+
+      //Register the App
       var rigView = angular.module('rigView',['ui.bootstrap','ngSanitize']); // Yee App of cause and purpose
       //var server = "http://localhost:3000"
       var server = "http://rigley-meaneymiked.rhcloud.com/"
+      var testStartTime = 0;
+      var isTesting = false;
+
+      //------------ Controller for the duration clock ---------------
+      rigView.controller('TimeCtrl', function($scope, $timeout) {
+      $scope.clock = "loading clock..."; // initialise the time variable
+      $scope.tickInterval = 100 //ms
+      var tick = function() {
+        $scope.clock = Date.now() // get the current time
+        $scope.millis = Date.now() - testStartTime;
+        $timeout(tick, $scope.tickInterval); // reset the timer
+        console.log(testStartTime);
+      }
+
+      // Start the timer
+      $timeout(tick, $scope.tickInterval);
+      });
+
+      //----------- Handles all of the Testing ---------------------
       rigView.controller('intakeController', function($scope, $http, $sce){
       //The object for storing the PID info
       $scope.PID = {
       text: null
       }
 
- //     rigView.filter('unsafe', function($sce))
-
-    //Array of all Rig objects
-    $scope.Rigs = [];
-    //Populate the Rigs array
-    function updateRigs(){
-      $http.get(server+'/status').
-        success(function(response){
-          $scope.Rigs = response;
-          console.log($scope.Rigs);
-      });
-    }
-    updateRigs();
+      //Array of all Rig objects
+      $scope.Rigs = [];
+      //Populate the Rigs array
+      function updateRigs(){
+        $http.get(server+'/status').
+          success(function(response){
+            $scope.Rigs = response;
+            console.log($scope.Rigs);
+        });
+      }
+      updateRigs();
 
   //Save the rig selected
   $scope.selectedRig = {
@@ -154,8 +182,8 @@
   };
 
   $scope.selectedRig.theRig = $scope.selectedRig.allRigs[0];
-  //The Rig Statuses updates every second
-  //$scope.rigStatuses = "";
+
+  //Poll the Status of the rigs.
   setInterval(function(){
         $http.get(server+'/status').
           success(function(response){
@@ -170,19 +198,25 @@
               
               switch(response[index].State){
                 case 'Waiting':
+                  isTesting = false;
+
                   $scope.theClass = 'rigWaiting'
                   $scope.theInstruction= 'Please provide<br/>participant ID.'
+                  $scope.showClock = false
+                  testStartTime = Date.now()
                   break;
                 case 'Ready':
                   $scope.theClass = 'rigReady'
                   $scope.theInstruction= 'Please break<br/>beam by <br/>submerging your hand<br>into ice bath.'
+                  $scope.showClock = false
                   break;
                 case 'Testing':
+                  isTesting = true;
                   $scope.theClass = 'rigTesting'
-                  $scope.theInstruction= 'Elapsed time: </br>'+2452
-
-                  //provide the millis for when it started in browser
-                  //knowing that there is at least a one second delay s
+                  $scope.showClock = true
+                  $scope.theInstruction= 'The current duration is'
+                  
+                  console.log("DERP!:  "+Date.now)
                   break;
               } // EOF for value switch
 
@@ -190,6 +224,7 @@
           })// EOF for HTTP success
   }, 1000);
   
+
   //Function for handling rig Selection
   $scope.rigSelect=function(){
     console.log("----- Rig Stats ----");
@@ -220,10 +255,12 @@
   }
   
 });
+
+
+
 </script>
     
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../bower_components/bootstrap/assets/js/ie10-viewport-bug-workaround.js"></script>
+
   </body>
 </html>
 
