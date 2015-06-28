@@ -120,8 +120,8 @@
               <td>{{ x.RigID }}</td>
               <td>{{ x.PID }}</td>
               <td>{{ x.Data.timeOut | date:'MM/dd/yyyy' }}</td>
-              <td>{{ x.Data.timeIn | date:'HH:mm:ss' }}</td>
-              <td>{{ x.Data.timeOut | date:'HH:mm:ss' }}</td>
+              <td>{{ x.Data.timeIn | date:'HH:mm:ss.sss' }}</td>
+              <td>{{ x.Data.timeOut | date:'HH:mm:ss.sss' }}</td>
               <td>{{ x.Data.durration/1000 | number : 3 }}</td>                 
             </tr>
           </tbody>
