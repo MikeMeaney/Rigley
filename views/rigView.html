@@ -29,15 +29,25 @@
     
     
     <style type="text/css">  
+      .rigCalibrating{
+        color : yellow;
+        background-color: black;
+      }
       .rigReady{
+        color: black;
         background-color: #009933;
       }
       .rigWaiting{
+        color: black;
         background-color: #003399;
-        color: #A9A9A9;
       }
       .rigTesting{
+        color: black;
         background-color: #333333;
+      }
+      .rigDone{
+        background-color: red;
+        color: white;
       }
       .navInput{
         vertical-align: bottom;
@@ -58,7 +68,6 @@
         color: #009933;
       }
       .instruction{
-        color: black;
         font-size: 100px;
         font-style: bold;
         text-align: center;
@@ -116,7 +125,7 @@
         <br/>
       </div>
     </div>
-    <div class = "row instruction">
+    <div class = "row instruction {{theClass}}">
       <div class = "col-md-12">
         <p ng-bind-html="theInstruction"></p>
         <p ng-hide="!showClock" ng-controller="TimeCtrl">{{millis / 1000 | number : 3}} seconds.</p>
@@ -203,12 +212,12 @@
                 };
               //EOF Kludge
 
-
               $scope.rigSelect(); //print the selected rig
               
               switch(response[index].State){
                 case 'Waiting':
-                  isTesting = false;
+                  var
+                  isTesting = false
 
                   $scope.theClass = 'rigWaiting'
                   $scope.theInstruction= 'Please provide<br/>participant ID.'
@@ -221,13 +230,26 @@
                   $scope.showClock = false
                   break;
                 case 'Testing':
-                  isTesting = true;
+                  isTesting = true
                   $scope.theClass = 'rigTesting'
                   $scope.showClock = true
                   $scope.theInstruction= 'The approximate duration is'
-                  
-                  console.log("DERP!:  "+Date.now)
                   break;
+                case 'Calibrating':
+                  //alert("Calibrating")
+                  isTesting = false
+                  $scope.theClass = 'rigCalibrating'
+                  $scope.showClock = false
+                  $scope.theInstruction= 'Selected rig is calibrating'
+                break;
+
+                case 'Done':
+                  //alert("Calibrating")
+                  isTesting = false
+                  $scope.theClass = 'rigDone'
+                  $scope.showClock = false
+                  $scope.theInstruction= 'Thank you for<br/>your  participation :)'
+                break;
               } // EOF for value switch
 
 
