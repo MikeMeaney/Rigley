@@ -193,8 +193,17 @@
               console.log($scope.Rigs.indexOf($scope.selectedRig));
               
               var index = $scope.Rigs.indexOf($scope.selectedRig);
-              if(index < 0){index = 0};
-              
+              //When page loads it has a index of -1
+              //for the rig select menu. This is the 
+              // kludge to get past that.
+              if(index < 0)
+                {
+                  $scope.selectedRig = $scope.Rigs[0];
+                  index = 0;
+                };
+              //EOF Kludge
+
+
               $scope.rigSelect(); //print the selected rig
               
               switch(response[index].State){
