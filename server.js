@@ -82,7 +82,7 @@ app.get('/dataExport', function(req,res){
       console.log("----- "+ d +" -----"); //Debug //Print which Doc is being worked with
 
       var dateIn = new Date(parseInt(docs[d].Data.timeIn)) 
-      var dateOut = new Date(newparseInt(docs[d].Data.timeOut))
+      var dateOut = new Date(parseInt(docs[d].Data.timeOut))
        //Re-map the nested vars into a 1-D object
        var flatObject = {
         "PID" : docs[d].PID,
