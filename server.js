@@ -215,7 +215,7 @@ app.get('/RigView', function(req, res){
 
 //The rigs status route for getting state and sub-state data
 app.get('/status', function(req, res){
-   //res.header('Access-Control-Allow-Origin', '*');
+   res.header('Access-Control-Allow-Origin', '*');
    //console.log("------ GET req @ " + req.path +" ------" )
    //console.log(req.query);
     
