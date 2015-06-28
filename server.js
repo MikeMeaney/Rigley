@@ -81,11 +81,14 @@ app.get('/dataExport', function(req,res){
     for(var d = 0; d < docs.length; d++){
       console.log("----- "+ d +" -----"); //Debug //Print which Doc is being worked with
 
+       var dateIn = new Date(parseInt(docs[d].Data.timeIn));
+
+
        //Re-map the nested vars into a 1-D object
        var flatObject = {
         "PID" : docs[d].PID,
         "RigID" : docs[d].RigID,
-        "timeIn" : parseInt(docs[d].Data.timeIn),
+        "timeIn" : dateIn.getMonth(),
         "timeOut" : parseInt(docs[d].Data.timeOut),
         "duration": (parseInt(docs[d].Data.durration)/1000)
       }
@@ -125,8 +128,8 @@ app.get('/dataExport', function(req,res){
 //The Route for saving data to the Server's Mongo DB 
 app.get('/data', function(req,res){
   res.header('Access-Control-Allow-Origin', '*');
-  console.log("!------ GET req @ " + req.path +" ------!" )
-  console.log(req.query);
+  //console.log("!------ GET req @ " + req.path +" ------!" )
+  //console.log(req.query);
   //Check to see if there is data in the query
   if(req.query.rig != undefined){
   //Check to see if that Rig is registered
@@ -212,8 +215,8 @@ app.get('/RigView', function(req, res){
 
 //The rigs status route for getting state and sub-state data
 app.get('/status', function(req, res){
-   res.header('Access-Control-Allow-Origin', '*');
-   console.log("------ GET req @ " + req.path +" ------" )
+   //res.header('Access-Control-Allow-Origin', '*');
+   //console.log("------ GET req @ " + req.path +" ------" )
   
    console.log(req.query);
     //if no query is given then just send out all the rigs
