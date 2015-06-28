@@ -149,12 +149,12 @@
         $scope.clock = Date.now() // get the current time
         $scope.millis = Date.now() - testStartTime;
         $timeout(tick, $scope.tickInterval); // reset the timer
-        console.log(testStartTime);
+        //console.log(testStartTime);
       }
 
       // Start the timer
       $timeout(tick, $scope.tickInterval);
-      });
+      }); //  EOF TimeCtrl
 
       //----------- Handles all of the Testing ---------------------
       rigView.controller('intakeController', function($scope, $http, $sce){
@@ -187,6 +187,7 @@
   setInterval(function(){
         $http.get(server+'/status').
           success(function(response){
+          console.log("status response")
            // $scope.rigStatuses = response;
               //get the index of the 
               console.log($scope.Rigs.indexOf($scope.selectedRig));
@@ -194,7 +195,7 @@
               var index = $scope.Rigs.indexOf($scope.selectedRig);
               if(index < 0){index = 0};
               
-              $scope.rigSelect(); //print
+              $scope.rigSelect(); //print the selected rig
               
               switch(response[index].State){
                 case 'Waiting':
@@ -222,7 +223,7 @@
 
 
           })// EOF for HTTP success
-  }, 250);
+  }, 1000);
   
 
   //Function for handling rig Selection
