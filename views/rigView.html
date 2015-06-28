@@ -12,6 +12,7 @@
    
     <!--Angular, bitches-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-sanitize.js"></script>
     
     
     <!-- Bootstrap core CSS -->
@@ -37,22 +38,38 @@
       .navInput{
         vertical-align: bottom;
         padding-top: 13px;
+        color: orange;
       }
       #submit{
         color: white;
+      }
+      #currentPage{
+        color: #FF9900;
+      }
+      #submit{
+        color: orange;
       }
 
       #submit:hover{
         color: #009933;
       }
+      .instruction{
+        color: black;
+        font-size: 100px;
+        font-style: bold;
+        text-align: center;
+      }
+      .instructionMargin{
+        padding-bottom: 10%;
+      }
     </style> 
   </head>
 
   <body ng-controller="intakeController" class="{{theClass}}">
-
+ <!--- Always have a container Div, without Bootstrap fails to exisit-->
+    <div class="container">
     <nav class="navbar navbar-inverse navbar-fixed-top">
-      <!--- Always have a container Div, without Bootstrap fails to exisit-->
-      <div class="container">
+     
         <!-- This is our Nav-Bar at the top-->
         <div class="navbar-header"> 
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -68,51 +85,51 @@
           <ul class="nav navbar-nav">
             <li ><a href="/rigPortal">Rig View</a></li>
             <li><a href="/raPortal">RA Portal</a></li>
-            <li><a> Rig: <select class="navInput"
+            <li  class="navInput">Rig: <select
                          ng-model="selectedRig" 
                          ng-options="rig.ID for rig in Rigs" 
                          ng-change="rigSelect(rig)"
-                  />
-                </a>
+                  ></select>
             </li>
-
+            <li>&nbsp</li>
+            
             <li class="navInput">
              <form ng-submit="submit()"> 
               <input type="text" name="PID" ng-model='PID.text' placeholder='Enter PID'/>
-               <span id="submit" ng-click='submit()' class="glyphicon glyphicon glyphicon-arrow-right"></span>
+              <span id="submit" ng-click='submit()' class="glyphicon glyphicon glyphicon-arrow-right"></span>
               </form>
             </li>
           </ul>
         </div><!--/.nav-collapse -->
-    </nav>
+    </nav> 
     <!-- This is the body of the page -->
-      <!-- Kludgey fix to prevent content from going behind navbar-->
-      <div class="row" style="height:75px">
-        <div class="col-md-12">&nbsp</div>
-      </div> <!-- end kludge-->
-
-      <div class="row"> <!-- Partcipant & RA instructiobs-->
-        <div class="col-md-4 col-md-offset-4">
-          <h1>Howdy There, <br/> I'm Rigley!</div> 
-        </div>
-       </div>
-
-
-
+    <div class = "row">
+      <div class = "instructionMargin col-md-12">
+        <br/>
+      </div>
+    </div>
+    <div class = "row instruction">
+      <div class = "col-md-12">
+        <p ng-bind-html="theInstruction"></p>
+      </div>
+    </div>
+    </div> <!--End of Container -->
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script type="text/javascript">//Client Side script for Rigley's Test Subject-facing view
                             //Writen in Angular JS by Mike Meaney in San Diego, CA USA (2015)
 
-      var rigView = angular.module('rigView', ['ui.bootstrap']); // Yee App of cause and purpose
+      var rigView = angular.module('rigView',['ui.bootstrap','ngSanitize']); // Yee App of cause and purpose
       //var server = "http://localhost:3000"
       var server = "http://rigley-meaneymiked.rhcloud.com/"
-      rigView.controller('intakeController', function($scope, $http){
+      rigView.controller('intakeController', function($scope, $http, $sce){
       //The object for storing the PID info
       $scope.PID = {
       text: null
-    }
+      }
+
+ //     rigView.filter('unsafe', function($sce))
 
     //Array of all Rig objects
     $scope.Rigs = [];
@@ -129,7 +146,7 @@
   //Save the rig selected
   $scope.selectedRig = {ID : ''};
 
-  //The Rig Status
+  //The Rig Statuses updates every second
   $scope.rigStatus = "";
   setInterval(function(){
         $http.get(server+'/status').
@@ -144,15 +161,19 @@
               switch(value.State){
                 case 'Waiting':
                   $scope.theClass = 'rigWaiting'
+                  $scope.theInstruction= 'Please provide<br/>participant ID.'
                   break;
                 case 'Ready':
                   $scope.theClass = 'rigReady'
+                  $scope.theInstruction= 'Please break<br/>beam by <br/>submerging your hand<br>into ice bath.'
                   break;
                 case 'Testing':
                   $scope.theClass = 'rigTesting'
+                  //provide the millis for when it started in browser
+                  //knowing that there is at least a one second delay 
                   break;
-              }
-            })
+              } // EOF for value switch
+            }) // EOF for
 
           })
   }, 1000);
