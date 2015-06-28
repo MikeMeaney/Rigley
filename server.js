@@ -88,7 +88,7 @@ app.get('/dataExport', function(req,res){
         "PID" : docs[d].PID,
         "RigID" : docs[d].RigID,
         "timeIn" : (dateIn.getMonth()+1)+"/"+(dateIn.getDate()+1)+"/"+(dateIn.getYear()+1),
-        "timeOut" : (dateOut.getMonth()+1)+"/"+(dateOut.getDate()+1)+"/"+(dateOut.getYear()+1),
+        "timeOut" : (dateOut.getMonth()+1)+"/"+(dateOut.getDate()+1)+"/"+(dateOut.getFullYear()),
         "duration": (parseInt(docs[d].Data.durration)/1000)
       }
       console.log(flatObject); // Debug // Print out the flattend object
