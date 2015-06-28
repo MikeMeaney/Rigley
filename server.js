@@ -82,12 +82,13 @@ app.get('/dataExport', function(req,res){
       console.log("----- "+ d +" -----"); //Debug //Print which Doc is being worked with
 
       var dateIn = new Date(parseInt(docs[d].Data.timeIn)) 
+      var dateOut = new Date(newparseInt(docs[d].Data.timeOut))
        //Re-map the nested vars into a 1-D object
        var flatObject = {
         "PID" : docs[d].PID,
         "RigID" : docs[d].RigID,
         "timeIn" : (dateIn.getMonth()+1)+"/"+(dateIn.getDate()+1)+"/"+(dateIn.getYear()+1),
-        "timeOut" : parseInt(docs[d].Data.timeOut),
+        "timeOut" : ,
         "duration": (parseInt(docs[d].Data.durration)/1000)
       }
       console.log(flatObject); // Debug // Print out the flattend object
