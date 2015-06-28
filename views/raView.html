@@ -12,12 +12,24 @@
    
     <!--Angular, bitches-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-    
+
     
     <!-- Bootstrap core CSS -->
     <!--<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>-->
    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <style type="text/css">
+      .theBg{
+        background-color: #1d1d1d;
+      }
+      .data{
+        color: #99b433;
+      }
+      .timeIn{
+        color: #99b433;
+      }
+    </style>
 
     <!-- Bootstrap UI (I have no idea what I'm doing)-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap.min.js"></script>
@@ -36,7 +48,7 @@
     <![endif]-->
   </head>
 
-  <body>
+  <body class="theBg">
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <!--- Always have a container Div, without Bootstrap fails to exisit-->
@@ -59,7 +71,7 @@
             <li>&nbsp</li>
             <li>&nbsp</li>
             <li>&nbsp</li>
-            <li><a href="/dataExport">
+            <li ><a style="color:orange;" href="/dataExport">
               Export as CSV
               <span class="glyphicon glyphicon-download"></span>
             </a></li>
@@ -116,17 +128,16 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="x in data | orderBy:sortType:sortReverse">
+            <tr class="data" ng-repeat="x in data | orderBy:sortType:sortReverse">
               <td>{{ x.RigID }}</td>
               <td>{{ x.PID }}</td>
-              <td>{{ x.Data.timeOut | date:'MM/dd/yyyy' }}</td>
+              <td class="{{sortType}}">{{ x.Data.timeOut | date:'MM/dd/yyyy' }}</td>
               <td>{{ x.Data.timeIn | date:'HH:mm:ss.sss' }}</td>
               <td>{{ x.Data.timeOut | date:'HH:mm:ss.sss' }}</td>
               <td>{{ x.Data.durration/1000 | number : 3 }}</td>                 
             </tr>
           </tbody>
         </table>
-        <!--  Debug for sorting
           <div class="alert alert-info">
             <p>Sort Type: {{ sortType }}</p>
             <p>Sort Reverse: {{ sortReverse }}</p>
@@ -163,7 +174,7 @@
               $scope.data[d].Data.timeIn = parseFloat($scope.data[d].Data.timeIn);
               $scope.data[d].Data.timeIn = parseFloat($scope.data[d].Data.timeOut);
             }
-
+r3
           });
 
 
