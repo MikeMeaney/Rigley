@@ -88,8 +88,8 @@ app.get('/dataExport', function(req,res){
         "PID" : docs[d].PID,
         "RigID" : docs[d].RigID,
         "date" : (dateOut.getMonth()+1)+"/"+(dateOut.getDate()+1)+"/"+(dateOut.getFullYear()),
-        "timeIn" : (dateIn.getHours()+1)+"/"+(dateIn.getMinutes()+1)+"/"+(dateIn.getSeconds()+1)+"."+(dateIn.getMilliseconds()+1),
-        "timeOut" : (dateOut.getHours()+1)+"/"+(dateOut.getMinutes()+1)+"/"+(dateIn.getSeconds()+1)+"."+(dateOut.getMilliseconds()+1),
+        "timeIn" : (dateIn.getHours()+1)+":"+(dateIn.getMinutes()+1)+":"+(dateIn.getSeconds()+1)+"."+(dateIn.getMilliseconds()+1),
+        "timeOut" : (dateOut.getHours()+1)+":"+(dateOut.getMinutes()+1)+":"+(dateIn.getSeconds()+1)+"."+(dateOut.getMilliseconds()+1),
         "duration": (parseInt(docs[d].Data.durration)/1000)
       }
       console.log(flatObject); // Debug // Print out the flattend object
@@ -156,7 +156,7 @@ app.get('/data', function(req,res){
   });
   //Get the current PID of the targeted Rig
   Rig.findOne({ID : req.query.rig}, function(err, doc){
-    console.log("------ Fart -----------");
+    //console.log("------ Find One -----------");
     console.log(doc.CurrentPID);
     var thePID = doc.CurrentPID;
 
@@ -217,8 +217,8 @@ app.get('/RigView', function(req, res){
 app.get('/status', function(req, res){
    //res.header('Access-Control-Allow-Origin', '*');
    //console.log("------ GET req @ " + req.path +" ------" )
-  
-   console.log(req.query);
+   //console.log(req.query);
+    
     //if no query is given then just send out all the rigs
     Rig.find({}).exec(function(err,docs){
       if(err) res.send(err); // Send out the error
