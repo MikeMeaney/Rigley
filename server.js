@@ -87,7 +87,7 @@ app.get('/dataExport', function(req,res){
         "RigID" : docs[d].RigID,
         "timeIn" : parseInt(docs[d].Data.timeIn),
         "timeOut" : parseInt(docs[d].Data.timeOut),
-        "duration": parseInt(docs[d].Data.durration)
+        "duration": (parseInt(docs[d].Data.durration)/1000)
       }
       console.log(flatObject); // Debug // Print out the flattend object
       console.log("******* "+ d +" *******"); //Debug //Print which Doc is being worked with
