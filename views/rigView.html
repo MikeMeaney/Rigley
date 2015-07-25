@@ -216,13 +216,11 @@
               
               switch(response[index].State){
                 case 'Waiting':
-                  var
-                  isTesting = false
-
+                  isTesting = false;
                   $scope.theClass = 'rigWaiting'
                   $scope.theInstruction= 'Please provide<br/>participant ID.'
                   $scope.showClock = false
-                  testStartTime = Date.now()
+                  //testStartTime = Date.now() //This shouldn't be here/
                   break;
                 case 'Ready':
                   $scope.theClass = 'rigReady'
@@ -230,11 +228,26 @@
                   $scope.showClock = false
                   break;
                 case 'Testing':
-                  isTesting = true
-                  $scope.theClass = 'rigTesting'
-                  $scope.showClock = true
-                  $scope.theInstruction= 'The approximate duration is'
+                  /*
+                  This is where the fix needs to go.
+                  The fix needs check the state if isTesting. 
+                    -If testing is in progress, then do not reset the testStartTime varible
+                    -because doing so will cause the timer presented to the partcipant
+                    -else, set testStartTime to Date.now()
+                  */
+                  if(isTesting == true){
+                    $scope.theClass = 'rigTesting'
+                    $scope.showClock = true
+                    $scope.theInstruction= 'The approximate duration is'  
+                    console.log("DERP!:  "+Date.now())
+                  } else {
+                    testStartTime = Date.now();
+                    //Set isTesting for true once
+                    isTesting = true;
+                    break;
+                  }
                   break;
+
                 case 'Calibrating':
                   //alert("Calibrating")
                   isTesting = false
@@ -249,10 +262,9 @@
                   $scope.theClass = 'rigDone'
                   $scope.showClock = false
                   $scope.theInstruction= 'Thank you for<br/>your  participation :)'
+                  testStartTime = 0;
                 break;
               } // EOF for value switch
-
-
           })// EOF for HTTP success
   }, 1000);
   
